@@ -1,0 +1,9 @@
+flask
+flask-mysqldb
+flask-bcrypt
+flask-mail
+pymysql
+pillow
+numpy
+opencv-python
+tensorflow

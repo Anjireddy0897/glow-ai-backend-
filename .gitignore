@@ -1,0 +1,54 @@
+# Python cache
+
+**pycache**/
+*.pyc
+
+# Virtual environments
+
+venv/
+.venv/
+env/
+
+# Database
+
+*.db
+*.sqlite3
+database.db
+
+# ML Models (large files)
+
+*.h5
+*.pkl
+*.pt
+*.pth
+*.onnx
+
+# Datasets
+
+*.csv
+*.zip
+datasets/
+
+# Uploads
+
+uploads/
+
+# Images (optional)
+
+*.png
+*.jpg
+*.jpeg
+
+# IDE files
+
+.vscode/
+.idea/
+
+# Environment variables
+
+.env
+
+# OS files
+
+.DS_Store
+Thumbs.db
