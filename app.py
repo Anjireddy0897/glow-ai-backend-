@@ -29,7 +29,13 @@ except ImportError:
     print("[WARN] flask_mail not installed; email features will be disabled")
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, origins=["http://localhost:5173", "http://localhost:5175", "http://localhost:3000"])
+CORS(app, supports_credentials=True, origins=[
+    "http://localhost:5173",
+    "http://localhost:5175",
+    "http://localhost:3000",
+    "http://14.139.187.229:8073",
+    "http://180.235.121.253:8149"
+])
 
 app.config['SECRET_KEY'] = 'secretkey123'
 
@@ -639,6 +645,7 @@ def setup_tables():
 # SUBMIT SURVEY
 # -----------------------------------
 
+@app.route('/api/submit_survey', methods=['POST'])
 @app.route('/api/submit_survey/', methods=['POST'])
 def submit_survey():
     data = request.json
@@ -978,6 +985,7 @@ def ai_recommend():
 # RECOMMEND PRODUCT
 # -----------------------------------
 
+@app.route('/api/recommend_products', methods=['POST'])
 @app.route('/api/recommend_products/', methods=['POST'])
 
 def recommend():
@@ -1987,6 +1995,24 @@ def debug_surveys():
         return jsonify(results)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.errorhandler(404)
+def handle_404(error):
+    return jsonify({
+        "status": "error",
+        "message": "Endpoint not found. Please check the URL and method.",
+        "path": request.path
+    }), 404
+
+
+@app.errorhandler(405)
+def handle_405(error):
+    return jsonify({
+        "status": "error",
+        "message": "Method not allowed. Check HTTP method for this endpoint.",
+        "path": request.path
+    }), 405
 
 
 # -----------------------------------
